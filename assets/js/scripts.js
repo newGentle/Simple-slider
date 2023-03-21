@@ -23,5 +23,15 @@ const details = {
 };
 let i = 2;
 const mainImage = document.querySelector('.img>img');
-mainImage.src=details[item + i].image;
+const cityText = document.querySelector('.city>span');
+const apartmentText = document.querySelector('.apartment>span');
+const timeText = document.querySelector('.time>span');
+const costText = document.querySelector('.cost>span');
+mainImage.src=details['item' + i].image;
+cityText.innerHTML = details['item' + i].city;
+apartmentText.innerHTML = details['item' + i].apartment;
+timeText.innerHTML = details['item' + i].time;
+costText.innerHTML = details['item' + i].cost;
 
+console.log(Object.keys(details).length)
+document.querySelectorAll('.dots').forEach(elem => console.log(elem.getAttribute('class')))

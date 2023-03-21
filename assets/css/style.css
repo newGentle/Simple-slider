@@ -171,11 +171,13 @@ body {
     grid-column-start: 1;
     grid-column-end: 3;
     align-self: self-end;
+    cursor: pointer;
 }
 
 .arrows > .left-arrow {
     margin-right: 29px;
     text-decoration: none;
+    
 }
 
 .arrows > .right-arrow {
