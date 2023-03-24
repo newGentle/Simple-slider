@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #131313;
+    box-sizing: border-box;
 }
 
 .main {
@@ -98,6 +99,7 @@ body {
     grid-area: 2 / 3 / 7 / 6;
     justify-self: end;
     width: fit-content;
+    transition: 0.5s ease-in-out;
 
 }
 
@@ -131,7 +133,7 @@ body {
     grid-column-start: 1;
     grid-column-end: 2;
     width: auto;
-    height: 91px;
+    height: 95px;
 }
 
 .details {
@@ -149,7 +151,7 @@ body {
     grid-column-start: 1;
     grid-column-end: 2;
     margin-top: 30px;
-    height: 91px;
+    height: 95px;
 }
 
 .apartment {

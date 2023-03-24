@@ -43,70 +43,99 @@ const links = document.querySelectorAll('.link');
 const dots = document.querySelectorAll('.dots');
 const leftArrow = document.querySelector('.left-arrow');
 const rightArrow = document.querySelector('.right-arrow');
+let nextElement = '';
 
 links.forEach(item => {
     item.addEventListener('click', () => {
         links.forEach(i => i.setAttribute('data-state', ''));
         item.setAttribute('data-state', 'active-link');
         setNextElement(item.classList.item(1));
-
-        dots.forEach(dot => {
-            dot.setAttribute('data-state', '')
-            dot.querySelector('rect').setAttribute('fill-opacity', '0.3')
-            if (dot.classList.item(1) == item.classList.item(1)) {
-                dot.setAttribute('data-state', 'active-dot');
-            };
-        });
         
+        changeDot(item.classList.item(1));        
     });
 });
+
+dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+        dots.forEach(i => {
+            i.setAttribute('data-state', '');
+            i.querySelector('rect').setAttribute('fill-opacity', '0.3');
+        });
+        dot.setAttribute('data-state', 'active-dot');
+        setNextElement(dot.classList.item(1));
+        
+        changeLink(dot.classList.item(1));        
+    });
+});
+
+
 
 
 
 leftArrow.addEventListener('click', () => {
+    const slider=[];
+    for (item of Object.keys(details)) {
+        slider.push(item);
+    }
     dots.forEach(dot => {
-        if (dot.getAttribute('data-state') == 'active-dot') {
-         
-            for (let item = 0; item < Object.keys(details).length; item++) {
-                if (dot.classList.item(1) == Object.keys(details)[item]) {
-                    console.log(dot.classList.item(1));
-                    console.log(Object.keys(details)[item]);
-                    if (dot.previousElementSibling) {
-                        console.log('ok');
-                        setNextElement(dot.previousElementSibling.classList.item(1));
-                        dot.setAttribute('data-state', '');
-                        dot.querySelector('rect').setAttribute('fill-opacity', '0.3');
-                        dot.previousElementSibling.setAttribute('data-state', 'active-dot');
-
-                    }
-                    else {
-                        console.log(Object.keys(details).length - 1);
-                        // setNextElement(Object.keys(details)[Object.keys(details).length - 1])
-                        dot.setAttribute('data-state', '');
-                        dot.querySelector('rect').setAttribute('fill-opacity', '0.3')
-                        document.querySelectorAll('.dots.' + Object.keys(details)[Object.keys(details).length - 1]
-                        ).forEach(_dot => {
-                        
-                            _dot.setAttribute('data-state', 'active-dot');
-                        });
-                    };
-                }
+        if (dot.getAttribute('data-state') == 'active-dot') { 
+            if (dot.classList.item(1) == slider[0]) {
+                nextElement = slider[slider.length - 1];
+                // setNextElement(slider[slider.length - 1]);
             }
-
-
+            else {
+                nextElement = slider[slider.indexOf(dot.classList.item(1)) - 1 ];
+                // setNextElement(slider[slider.indexOf(dot.classList.item(1)) - 1 ]);
+            };
             
-            // const loop = dot.classList.item(1).match(/(\d+)/)[0] - 1
-            // console.log(loop);
-            // if (dot.classList.item(1) == Object.keys(details)[0]) {
-            //     setNextElement(Object.keys(details)[2])
-            //     document.querySelector('.' + Object.keys(details)[2]).setAttribute('data-state', 'active-dot');
-
-            // }
-            // else {
-            //     setNextElement(Object.keys(details)[loop - 1])
-            //     document.querySelector('.' + Object.keys(details)[loop - 1]).setAttribute('data-state', 'active-dot');
-                
-            // };
         };
     });
+    changeDot(nextElement);
+    changeLink(nextElement);
+    setNextElement(nextElement);
+
 });
+
+rightArrow.addEventListener('click', () => {
+    const slider=[];
+    for (item of Object.keys(details)) {
+        slider.push(item);
+    }
+    dots.forEach(dot => {
+        if (dot.getAttribute('data-state') == 'active-dot') { 
+            if (dot.classList.item(1) == slider[slider.length - 1]) {
+                nextElement = slider[0];
+                // setNextElement(slider[slider.length - 1]);
+            }
+            else {
+                nextElement = slider[slider.indexOf(dot.classList.item(1)) + 1 ];
+                // setNextElement(slider[slider.indexOf(dot.classList.item(1)) - 1 ]);
+            };
+            
+        };
+    });
+    changeDot(nextElement);
+    changeLink(nextElement);
+    setNextElement(nextElement);
+
+});
+
+
+function changeDot(dotClassName) {
+    dots.forEach(dot => {
+        dot.setAttribute('data-state', '');
+        dot.querySelector('rect').setAttribute('fill-opacity', '0.3');
+        if (dot.classList.item(1) == dotClassName) {
+            dot.setAttribute('data-state', 'active-dot');
+        };
+    });
+};
+
+function changeLink(linkClassName) {
+    links.forEach(link => {
+        link.setAttribute('data-state', '');
+        if (link.classList.item(1) == linkClassName) {
+            link.setAttribute('data-state', 'active-link');
+        };
+    });
+};
