@@ -39,19 +39,13 @@ body {
     cursor: pointer;
 }
 
-.active-link {
+.link[data-state='active-link'] {
     color: #E3B873;
     pointer-events: none;
     
 }
 
-.link1 {
-    grid-row: 1;
-    grid-column: 3;
-    position: relative;
-}
-
-.active-link::after {
+.link[data-state='active-link']::after {
     position: absolute;
     content: '';
     height: 1px;
@@ -61,13 +55,20 @@ body {
     top: 25px;
 }
 
-.link2 {
+.link.item1 {
+    grid-row: 1;
+    grid-column: 3;
+    position: relative;
+}
+.link.item2 {
     grid-row: 1;
     grid-column: 4;
+    position: relative;
 }
-.link3 {
+.link.item3 {
     grid-row: 1;
     grid-column: 5;
+    position: relative;
 }
 .header3 {
     grid-row-start: 2;
@@ -80,7 +81,7 @@ body {
     letter-spacing: -0.07em;
     text-transform: uppercase;
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .header3::after {
@@ -130,6 +131,7 @@ body {
     grid-column-start: 1;
     grid-column-end: 2;
     width: auto;
+    height: 91px;
 }
 
 .details {
@@ -147,6 +149,7 @@ body {
     grid-column-start: 1;
     grid-column-end: 2;
     margin-top: 30px;
+    height: 91px;
 }
 
 .apartment {
@@ -171,13 +174,11 @@ body {
     grid-column-start: 1;
     grid-column-end: 3;
     align-self: self-end;
-    cursor: pointer;
 }
 
 .arrows > .left-arrow {
     margin-right: 29px;
     text-decoration: none;
-    
 }
 
 .arrows > .right-arrow {
@@ -187,6 +188,7 @@ body {
 
 .arrows .dots{
     text-decoration: none;
+    cursor: pointer;
 }
 
 .dots:nth-child(3) {
@@ -201,6 +203,17 @@ body {
     fill-opacity: 1;
 }
 
-.active-dot {
+.left-arrow:hover, 
+.right-arrow:hover {
+    cursor: pointer;
+}
+
+.dots[data-state='active-dot'] {
+    cursor: auto;
+}
+
+.dots[data-state='active-dot'] rect {
     pointer-events: none;
+    fill-opacity: 1;
+    fill: white;
 }
