@@ -28,16 +28,24 @@ function setNextElement(item) {
     const apartmentText = document.querySelector('.apartment>span');
     const timeText = document.querySelector('.time>span');
     const costText = document.querySelector('.cost>span');
-
-    mainImage.src=details[item].image;
+    
+    mainImage.setAttribute('class', 'fading');
+    
+    mainImage.src = details[item].image;
     cityText.innerHTML = details[item].city;
     apartmentText.innerHTML = details[item].apartment;
     timeText.innerHTML = details[item].time;
     costText.innerHTML = details[item].cost;
-}
+    sto();
 
-// console.log(Object.keys(details).length)
-// document.querySelectorAll('.dots').forEach(elem => console.log(elem.getAttribute('class')))
+    function sto() {
+        let timeOut = setTimeout(deleteFading, 500);
+    };
+    function deleteFading() {
+        mainImage.removeAttribute('class', 'fading');
+    }
+
+}
 
 const links = document.querySelectorAll('.link');
 const dots = document.querySelectorAll('.dots');
@@ -139,3 +147,4 @@ function changeLink(linkClassName) {
         };
     });
 };
+
