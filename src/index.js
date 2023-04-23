@@ -1,7 +1,9 @@
 'use strict';
 
 import '../src/css/style.css';
-import images from '../src/img/*.png';
+import image1 from '../src/img/image1.png';
+import image2 from '../src/img/image2.png';
+import image3 from '../src/img/image3.png';
 
 
 

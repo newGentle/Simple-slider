@@ -16,6 +16,8 @@ module.exports = {
     },
     output: {
       filename: "main.js",
+      assetModuleFilename: 'img/[name][ext]',
+      clean: true
     },
     devtool: "inline-source-map",
     stats: {
@@ -49,7 +51,7 @@ module.exports = {
     module: {
       rules: [
         {
-          test: /\.css$/,
+          test: /\.(css|sass|scss)$/,
           use: [
             {
               loader: MiniCssExtractPlugin.loader,
@@ -72,6 +74,10 @@ module.exports = {
           loader: "ts-loader",
           exclude: /node-modules/,
         },
+        {
+          test: /\.(png|jp?g|gif|svg)$/i,
+          type: 'asset/resource'
+        }
       ],
     },
 };
