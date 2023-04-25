@@ -1,28 +1,27 @@
 'use strict';
 
 import '../src/css/style.css';
+
 import image1 from '../src/img/image1.png';
 import image2 from '../src/img/image2.png';
 import image3 from '../src/img/image3.png';
 
 
-
-
 const details = {
 item1: fetch('http://localhost:3000/item1/')
-.then((response) => response.json())
-.then((data) => JSON.parse(data)),
+    .then(async (response) => response.json())
+    .then((data) => console.log(data[0].image)),
 
 item2: fetch('http://localhost:3000/item2/')
-.then((response) => response.json())
-.then((data) => JSON.parse(data)),
+    .then(async (response) => response.json())
+    .then((data) => (data)),
 
 item3: fetch('http://localhost:3000/item3/')
-.then((response) => response.json())
-.then((data) => JSON.parse(data)),
+    .then(async (response) => response.json())
+    .then((data) => (data)),
 };
 
-console.log(details['item1']);
+
 function setNextElement(item) {
     const mainImage = document.querySelector('.img>img');
     const cityText = document.querySelector('.city>span');

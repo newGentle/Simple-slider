@@ -5,21 +5,16 @@ const OptimizeCSSAssetsPlugin = require("css-minimizer-webpack-plugin");
 const TerserJSPlugin = require("terser-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
+const ImageMinPlugin = require("imagemin-webpack");
 
 
 module.exports = {
-    mode: 'production',
     entry: path.join(__dirname, "src", "index.js"),
-    devServer: {
-      static: path.join(__dirname, "dist"),
-      port: 8001,
-    },
     output: {
       filename: "main.js",
-      assetModuleFilename: 'img/[name][ext]',
+      // assetModuleFilename: 'img/[name][ext]',
       clean: true
     },
-    devtool: "inline-source-map",
     stats: {
       children: false,
     },
@@ -39,6 +34,16 @@ module.exports = {
         files: path.join(__dirname, "dist", "main.css"),
         fix: true,
       }),
+      new ImageMinPlugin({
+        bail: false,
+        // Cache: true,
+        name: "img/[name].[ext]",
+        imageminOptions: {
+          plugins: [
+            ["optipng", { optimizationLevel: 5 }]
+          ]
+        }
+      })
     ],
 
     optimization: {
