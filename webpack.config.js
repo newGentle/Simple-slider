@@ -5,18 +5,25 @@ const OptimizeCSSAssetsPlugin = require("css-minimizer-webpack-plugin");
 const TerserJSPlugin = require("terser-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
-const ImageMinPlugin = require("imagemin-webpack");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 
 module.exports = {
+
     entry: path.join(__dirname, "src", "index.js"),
     output: {
       filename: "main.js",
-      // assetModuleFilename: 'img/[name][ext]',
-      clean: true
+      clean: true,
+      assetModuleFilename: 'img/[name][ext]'
     },
     stats: {
       children: false,
+    },
+    performance: {
+      maxAssetSize: 1000000,
+    },
+    experiments: {
+      topLevelAwait: true
     },
 
     plugins: [
@@ -34,22 +41,23 @@ module.exports = {
         files: path.join(__dirname, "dist", "main.css"),
         fix: true,
       }),
-      new ImageMinPlugin({
-        bail: false,
-        // Cache: true,
-        name: "img/[name].[ext]",
-        imageminOptions: {
-          plugins: [
-            ["optipng", { optimizationLevel: 5 }]
-          ]
-        }
-      })
     ],
 
     optimization: {
       minimizer: [
         new TerserJSPlugin([]), 
         new OptimizeCSSAssetsPlugin({}),
+        new ImageMinimizerPlugin({
+          loader: false,
+          minimizer: {
+            implementation: ImageMinimizerPlugin.imageminMinify,
+            options: {
+              plugins: [
+                ["optipng", { optimization: 5 }]
+              ]
+            }
+          }
+        })
       ],
     },
 
@@ -81,7 +89,7 @@ module.exports = {
         },
         {
           test: /\.(png|jp?g|gif|svg)$/i,
-          type: 'asset/resource'
+          type: 'asset/resource',
         }
       ],
     },
