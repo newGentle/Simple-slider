@@ -10,7 +10,7 @@ const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
 
-    entry: path.join(__dirname, "src", "index.js"),
+    entry: path.join(__dirname, "src", "index.ts"),
     output: {
       filename: "main.js",
       clean: true,
@@ -37,7 +37,7 @@ module.exports = {
         extensions: "ts",
       }),
       new StylelintPlugin({
-        extensions: ["css"],
+        extensions: ['css', 'scss', 'sass'],
         files: path.join(__dirname, "dist", "main.css"),
         fix: true,
       }),
@@ -73,6 +73,8 @@ module.exports = {
               },
             },
             "css-loader",
+            "sass-loader",
+            
           ],
         },
         {

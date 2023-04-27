@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+
+@mixin Yeseva() {
+    font-family: 'Yeseva One';
+    font-style: normal;
+    font-weight: 400;
+}
+
+@mixin Nunito() {
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 400;
+}
+
+$bg-color: #131313;
+$main-color: #E3B873;
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $bg-color;
+    box-sizing: border-box;
+}
+
+.main {
+    max-width: 1440px;
+    height: 780px;
+    margin: 0 auto;
+    margin-top: 70px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 240px auto;
+    grid-template-rows: auto;
+    column-gap: 50px;
+    max-width: 1177px;
+    margin: 100px auto;
+}
+
+.link {
+    border: $bg-color 1px solid;
+    color: rgba(255, 255, 255, 0.3);
+    @include Yeseva;
+    font-size: 14px;
+    line-height: 19px;
+    text-transform: uppercase;
+    padding-bottom: 50px;
+    
+    &:hover {
+        color: $main-color;
+        cursor: pointer;
+    }
+
+    &[data-state="active-link"] {
+        color: $main-color;
+        pointer-events: none;
+
+        &::after {
+            position: absolute;
+            content: '';
+            height: 1px;
+            width: 90%;
+            background-color: $main-color;
+            left: 0;
+            top: 25px;
+        }
+    }
+
+    &.item1 {
+        grid-row: 1;
+        grid-column: 3;
+        position: relative;
+    }
+    &.item2 {
+        grid-row: 1;
+        grid-column: 4;
+        position: relative;
+    }
+    &.item3 {
+        grid-row: 1;
+        grid-column: 5;
+        position: relative;
+    }
+}
+
+.header3 {
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-end: 3;
+    text-align: start;
+    font-size: 27px;
+    line-height: 37px;
+    letter-spacing: -0.07em;
+    text-transform: uppercase;
+    position: relative;
+    margin-bottom: 10px;
+
+    &::after {
+        position: absolute;
+        content: '';
+        width: 90px;
+        height: 1px;
+        background-color: $main-color;
+        top: 60px;
+        left: 125px;
+    }
+}
+
+
+.img {
+    grid-area: 2 / 3 / 7 / 6;
+    justify-self: end;
+    width: fit-content;
+    transition: 0.5s ease-in-out;
+
+}
+
+.text {
+    grid-row-start: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-end: 4;
+    color: #fff;
+    @include Nunito;
+    font-size: 14px;
+    line-height: 27px;
+    margin-bottom: 40px;
+}
+
+.text-style {
+    @include Yeseva;
+    font-size: 18px;
+    line-height: 25px;
+    text-transform: uppercase;
+    color: $main-color;
+}
+
+.city {
+    grid-row-start: 4;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    width: auto;
+    height: 95px;
+}
+
+.details {
+    @include Nunito;
+    font-size: 13px;
+    line-height: 21px;
+    text-transform: none;
+    color: #FFFFFF;
+}
+.time {
+    grid-row-start: 5;
+    grid-row-end: 6;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    margin-top: 30px;
+    height: 95px;
+}
+
+.apartment {
+    grid-row-start: 4;
+    grid-row-end: 5;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    width: 200px;
+}
+
+.cost {
+    grid-row-start: 5;
+    grid-row-end: 6;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    margin-top: 30px;
+}
+
+.arrows {
+    grid-row-start: 6;
+    grid-row-end: 7;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    align-self: self-end;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+.left-arrow {
+    margin-right: 29px;
+    text-decoration: none;
+    &:hover {
+        cursor: pointer;
+    }
+}
+    
+.right-arrow {
+    margin-left: 29px;
+    text-decoration: none;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.dots {
+    text-decoration: none;
+    cursor: pointer;
+    
+    &:nth-child(3) {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    &[data-state='active-dot'] {
+        cursor: auto;
+    }
+
+}
+
+
+.left-arrow:hover path, 
+.right-arrow:hover path,
+.dots:hover rect {
+    fill: $main-color;
+    fill-opacity: 1;
+}
+
+.dots[data-state='active-dot'] rect {
+    pointer-events: none;
+    fill-opacity: 1;
+    fill: white;
+}
+
+.fading {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
