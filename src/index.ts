@@ -47,12 +47,10 @@ function setNextElement(item: string | any) {
     function deleteFading() {
         mainImage.removeAttribute('class', 'fading');
     }
-
 }
 
 const links = document.querySelectorAll('.link');
 const dots = document.querySelectorAll('.dots');
-
 const leftArrow: Element | any = document.querySelector('.left-arrow');
 const rightArrow: Element | any = document.querySelector('.right-arrow');
 let nextElement = '';
@@ -75,11 +73,9 @@ dots.forEach((dot: string | any) => {
         });
         dot.setAttribute('data-state', 'active-dot');
         setNextElement(dot.classList.item(1));
-        
         changeLink(dot.classList.item(1));        
     });
 });
-
 
 leftArrow.addEventListener('click', () => {
     const slider: any =[];
@@ -94,7 +90,6 @@ leftArrow.addEventListener('click', () => {
             else {
                 nextElement = slider[slider.indexOf(dot.classList.item(1)) - 1 ];
             }
-            
         }
     });
     changeDot(nextElement);
