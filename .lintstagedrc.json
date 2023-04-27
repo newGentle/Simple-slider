@@ -5,5 +5,5 @@
     "*.html": [
       "eslint"
     ],
-    "*.scss": "eslint"
+    "*.scss": "stylelint"
   }
